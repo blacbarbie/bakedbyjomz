@@ -455,7 +455,8 @@
                                    <option value="orange">Orange</option>
                                    <option value="red-velvet">Red Velvet</option>
                                    <option value="marble">Marble</option>
-                                   <option value="vanilla">Vanilla</option>
+                                   <option value="vanilla">Vanilla</option>     
+                                  <option value="chocolate">Chocolate</option>
                                </select>
                            </div>
                           
@@ -489,7 +490,51 @@
            </div>
        </div>
    </section>
+<section>
+  <div class="md:w-1/2">
+    <div class="bg-pink-50 p-8 rounded-xl shadow-md h-full">
+      <h3 class="text-2xl font-semibold text-pink-800 mb-6">Send Us a Message</h3>
 
+      <form id="order-form" class="space-y-6">
+        <div>
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" class="w-full border p-2" required>
+        </div>
+
+        <div>
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" class="w-full border p-2" required>
+        </div>
+
+        <div>
+          <label for="cake">Cake Flavor</label>
+          <select id="cake" name="cake" class="w-full border p-2" required>
+            <option value="">Select a flavor</option>
+             <option value="white forest">White Forest</option>    
+             <option value="black forest">Black Forest</option>     
+             <option value="black & white forest">Black & White Forest</option>     
+             <option value="caramel">Caramel</option>     
+             <option value="coconut">Coconut</option>     
+             <option value="orange">Orange</option>     <option value="marble">Marble</option>     <option value="red velvet">Red Velvet</option>     <option value="vanilla">Vanilla</option>     <option value="chocolate">Chocolate</option>
+            
+          </select>
+        </div>
+
+        <div>
+          <label for="size">Cake Size</label>
+          <select id="size" name="size" class="w-full border p-2" required>
+            <option value="">Select a size</option>
+            <option value="0.5kg">½ KG</option>
+            <option value="1kg">1 KG</option>
+            <option value="2kg">2 KG</option>   
+            <option value="3kg">3 KG</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="message">Special Instructions</label>
+          <textarea id="message" name="message" class="w-full border p-2"></textarea>
+        </div>
 
    <!-- Footer -->
    <footer class="bg-pink-800 text-white py-12">
@@ -568,6 +613,15 @@
   }
 
   // WhatsApp function
+  const form = document.getElementById('order-form');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thank you for your order! We will contact you shortly to confirm the details.');
+      form.reset();
+    });
+  }
+
   function sendToWhatsApp() {
     const name = document.getElementById("name").value;
     const phone = document.getElementById("phone").value;
@@ -575,18 +629,27 @@
     const size = document.getElementById("size").value;
     const message = document.getElementById("message").value;
 
+    if (!name || !phone || !cake || !size) {
+      alert("Please fill out all fields before sending via WhatsApp.");
+      return;
+    }
+
     const text = `New Cake Order:%0AName: ${name}%0APhone: ${phone}%0AFlavor: ${cake}%0ASize: ${size}%0ASpecial Instructions: ${message}`;
     const url = `https://wa.me/254117366163?text=${text}`;
     window.open(url, '_blank');
   }
 
-  // Email function
   function sendEmail() {
     const name = document.getElementById("name").value;
     const phone = document.getElementById("phone").value;
     const cake = document.getElementById("cake").value;
     const size = document.getElementById("size").value;
     const message = document.getElementById("message").value;
+
+    if (!name || !phone || !cake || !size) {
+      alert("Please fill out all fields before sending an email.");
+      return;
+    }
 
     const subject = "New Cake Order";
     const body = `Name: ${name}%0APhone: ${phone}%0AFlavor: ${cake}%0ASize: ${size}%0ASpecial Instructions: ${message}`;
