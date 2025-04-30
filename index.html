@@ -610,6 +610,19 @@
     const body = `Name: ${name}%0APhone: ${phone}%0AFlavor: ${cake}%0ASize: ${size}%0ASpecial Instructions: ${message}`;
     const mailto = `mailto:gladwelljomo72@gmail.com?subject=${subject}&body=${body}`;
     window.location.href = mailto;
+
+      // Close mobile menu if open
+       mobileMenu.classList.add('hidden');
+     });
+   });
+   // Form submission (would be connected to backend in real implementation)
+   const form = document.querySelector('form');
+   if (form) {
+     form.addEventListener('submit', (e) => {
+       e.preventDefault();
+       alert('Thank you for your order! We will contact you shortly to confirm the details.');
+       form.reset();
+     });
   }
 </script>
 
