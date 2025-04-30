@@ -476,8 +476,8 @@
                                <textarea id="message" rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-transparent" placeholder="Any special requests or decoration ideas..."></textarea>
                            </div>
                           
-                           <button type="submit" class="w-full px-6 py-4 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition duration-300 font-semibold">
-                               Send Order Request
+                           <button type="button" onclick="sendEmail()" class="w-full px-6 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300 font-semibold mt-4">
+                               Email Order Request
                            </button>
                           
                            <button type="button" onclick="sendToWhatsApp()" class="w-full px-6 py-4 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-300 font-semibold mt-4">
@@ -531,7 +531,6 @@
        </a>
    </div>
 
-
    <script>
        // Mobile menu toggle
        const menuBtn = document.getElementById('menu-btn');
@@ -540,6 +539,7 @@
        menuBtn.addEventListener('click', () => {
            mobileMenu.classList.toggle('hidden');
        });
+      }
       
        // Smooth scrolling for anchor links
        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -552,34 +552,48 @@
               
                // Close mobile menu if open
                mobileMenu.classList.add('hidden');
+              }
            });
        });
       
-       // Form submission (would be connected to backend in real implementation)
-       const form = document.querySelector('form');
-       if(form) {
-           form.addEventListener('submit', (e) => {
-               e.preventDefault();
-               alert('Thank you for your order! We will contact you shortly to confirm the details.');
-               form.reset();
-           });
-          <script>
+   <script>
+  // Form submit alert
+  const form = document.querySelector('form');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thank you for your order! We will contact you shortly to confirm the details.');
+      form.reset();
+    });
+  }
+
+  // WhatsApp function
   function sendToWhatsApp() {
-    const name = document.getElementById('name').value;
-    const phone = document.getElementById('phone').value;
-    const cake = document.getElementById('cake').value;
-    const size = document.getElementById('size').value;
-    const message = document.getElementById('message').value;
+    const name = document.getElementById("name").value;
+    const phone = document.getElementById("phone").value;
+    const cake = document.getElementById("cake").value;
+    const size = document.getElementById("size").value;
+    const message = document.getElementById("message").value;
 
-    const fullMessage = `New Order:%0AName: ${name}%0APhone: ${phone}%0ACake: ${cake}%0ASize: ${size}%0AMessage: ${message}`;
-    const whatsappURL = `https://wa.me/254117366163?text=${fullMessage}`;
+    const text = `New Cake Order:%0AName: ${name}%0APhone: ${phone}%0AFlavor: ${cake}%0ASize: ${size}%0ASpecial Instructions: ${message}`;
+    const url = `https://wa.me/254117366163?text=${text}`;
+    window.open(url, '_blank');
+  }
 
-    window.open(whatsappURL, '_blank');
+  // Email function
+  function sendEmail() {
+    const name = document.getElementById("name").value;
+    const phone = document.getElementById("phone").value;
+    const cake = document.getElementById("cake").value;
+    const size = document.getElementById("size").value;
+    const message = document.getElementById("message").value;
+
+    const subject = "New Cake Order";
+    const body = `Name: ${name}%0APhone: ${phone}%0AFlavor: ${cake}%0ASize: ${size}%0ASpecial Instructions: ${message}`;
+    const mailto = `mailto:wanguihannah254@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = mailto;
   }
 </script>
-       }
-   </script>
+
 </body>
 </html>
-
-
